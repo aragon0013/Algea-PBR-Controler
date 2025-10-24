@@ -3,6 +3,8 @@ from PyQt6.QtGui import *
 from PyQt6.QtWidgets import *
 from PyQt6.QtCore import *
 import dialogs
+from simplePage import SimplePage
+import UI.LightControl
 
 class PBRMainWindow(QMainWindow):
     def __init__(self, parent=None):
@@ -28,6 +30,19 @@ class PBRMainWindow(QMainWindow):
         extras_menu = self.menuBar().addMenu("Extras")
         about_action = self.addAction("About",self.about)
         extras_menu.addAction(about_action)
+
+        #Fenster Initialisierung
+        self.stack = QStackedWidget()
+        self.setCentralWidget(self.stack)
+        self.pages = [
+            SimplePage("Platzhalter Dasbhoard","das ist ein Test"),
+            SimplePage("Platzhalter Sensoren","sdklajföksad")
+        ]
+        for p in self.pages:
+            eff = QGraphicsOpacityEffect(p)
+            p.setGraphicsEffect(eff)
+            eff.setOpacity(1.0)
+            self.stack.addWidget(p)
         
         #Statusbar Initalisierung
         self.sizeLabel = QLabel()
@@ -55,9 +70,9 @@ class PBRMainWindow(QMainWindow):
     def close_app(self):
         self.close()
     def dashboard(self):
-        pass
+        self.stack.setCurrentIndex(0)
     def processControl(self):
-        pass
+        self.stack.setCurrentIndex(1)
     def lightControl(self):
         pass
     def sensorControl(self):
