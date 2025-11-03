@@ -4,7 +4,6 @@ from PyQt6.QtWidgets import *
 from PyQt6.QtCore import *
 import dialogs
 from simplePage import SimplePage
-import UI.LightControl
 
 class PBRMainWindow(QMainWindow):
     def __init__(self, parent=None):

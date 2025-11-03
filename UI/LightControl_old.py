@@ -219,7 +219,8 @@ class Ui_Dialog(object):
         self.checkBox_6.setText("")
         self.label_9.setText(QCoreApplication.translate("Dialog", u"activated LEDs", None))
         self.label_10.setText(QCoreApplication.translate("Dialog", u"LED Light Control", None))
-    # retranslateUi
+    # retranslateUi#
+    
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
