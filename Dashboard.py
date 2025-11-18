@@ -1,4 +1,5 @@
 import sys
+import time
 from PyQt6.QtCore import *
 from PyQt6.QtGui import *
 from PyQt6.QtWidgets import *
@@ -7,7 +8,8 @@ class Dashboard(QWidget):
     def __init__(self,parent=None):
         super(Dashboard, self).__init__(parent)
 
-        #Metadaten Initialisierung
+        #Prozesshalter für Sensor Loop
+        self.p = None
 
         #Layout Initalisierung
         self.verticalLayout = QVBoxLayout(parent)
@@ -104,10 +106,31 @@ class Dashboard(QWidget):
 
         self.verticalLayout.addLayout(self.horizontalLayout_temperature)
 
+        self.measure_control_layout = QHBoxLayout()
+        self.measure_control_layout.setObjectName(u"measure_control_layout")
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.measure_control_layout.addItem(self.horizontalSpacer_4)
+
+        self.button_start_measure = QPushButton(parent)
+        self.button_start_measure.setObjectName(u"button_start_measure")
+        self.measure_control_layout.addWidget(self.button_start_measure)
+
+        self.button_stop_measure = QPushButton(parent)
+        self.button_stop_measure.setObjectName(u"button_stop_measure")
+        self.measure_control_layout.addWidget(self.button_stop_measure)
+        self.button_stop_measure.setEnabled(False)
+
+        self.verticalLayout.addLayout(self.measure_control_layout)
+
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
         self.verticalLayout.addItem(self.verticalSpacer)
 
         self.retranslateUi(self)
+        
+        #Funktionen Connecten
+        self.button_start_measure.pressed.connect(self.start_measure)
+        self.button_stop_measure.pressed.connect(self.stop_measure)
+        
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
@@ -124,6 +147,51 @@ class Dashboard(QWidget):
         self.temperature_value.setText(QCoreApplication.translate("Form", u"NULL", None))
         self.temperature_measure_box.setText(QCoreApplication.translate("Form", u"measure", None))
         self.temperature_record_box.setText(QCoreApplication.translate("Form", u"record", None))
+        self.button_start_measure.setText(QCoreApplication.translate("Form", u"start measure", None))
+        self.button_stop_measure.setText(QCoreApplication.translate("Form", u"stop measure", None))
+
+    def start_measure(self):
+        self.p = QProcess()
+        self.p.finished.connect(self.measure_finished)
+        self.p.readyReadStandardOutput.connect(self.handle_stdout)
+        self.p.readyReadStandardError.connect(self.handle_stderr)
+        self.toggle_measure_boxes()
+        self.p.start("python3",['measure_loop.py'])
+
+    def stop_measure(self):
+        print("send terminate sensor_loop...")
+        self.p.terminate()
+        if not self.p.waitForFinished(500):
+            self.p.kill()
+
+    def handle_stdout(self):
+        data = self.p.readAllStandardOutput()
+        stdout = bytes(data).decode("utf8")
+        split_data = stdout.split()
+        print(split_data)
+
+    def handle_stderr(self):
+        data = self.p.readAllStandardError()
+        stderr = bytes(data).decode("utf8")
+        print(stderr)
+
+    def measure_finished(self):
+        print("Messungen erfolgreich beendet")
+        self.toggle_measure_boxes()
+    
+    def toggle_measure_boxes(self):
+        #Toggle Start Button
+        if self.button_start_measure.isEnabled():
+            self.button_start_measure.setEnabled(False)
+        else:
+            self.button_start_measure.setEnabled(True)
+        
+        #Toggle Stop Button
+        if self.button_stop_measure.isEnabled():
+            self.button_stop_measure.setEnabled(False)
+        else:
+            self.button_stop_measure.setEnabled(True)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
