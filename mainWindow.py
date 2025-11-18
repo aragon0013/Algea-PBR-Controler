@@ -35,7 +35,7 @@ class PBRMainWindow(QMainWindow):
         self.stack = QStackedWidget()
         self.setCentralWidget(self.stack)
         self.pages = [
-            Dashboard(),
+            Dashboard(self),
             SimplePage("Platzhalter Sensoren","sdklajföksad")
         ]
         for p in self.pages:
@@ -51,6 +51,8 @@ class PBRMainWindow(QMainWindow):
         status = self.statusBar()
         status.addPermanentWidget(self.sizeLabel)
         status.showMessage("Ready",0)
+        ##Statusbar Benachrichtigungen Initalisieren
+        self.pages[0].status_signal.connect(self.statusBar().showMessage)
 
     def addAction(self, text, slot=None, shortcut=None, icon=None, tip=None, checkable=False):
         action = QAction(text,self)

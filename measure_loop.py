@@ -17,7 +17,7 @@ time.sleep(2)
 
 while measure["running"]:
     sys.stdout.write("__________________\n")
-    sys.stdout.write(f"Loop{counter}\n")
+    sys.stdout.write(f"Timestamp:{counter}\n")
     sys.stdout.write("sensor01:pH_data\n")
     sys.stdout.write("sensor02:conductivity_data\n")
     sys.stdout.write("sensor03:temperature_data\n")

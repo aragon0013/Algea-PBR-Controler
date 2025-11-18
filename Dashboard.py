@@ -5,6 +5,8 @@ from PyQt6.QtGui import *
 from PyQt6.QtWidgets import *
 
 class Dashboard(QWidget):
+    status_signal = pyqtSignal(str)
+
     def __init__(self,parent=None):
         super(Dashboard, self).__init__(parent)
 
@@ -12,14 +14,14 @@ class Dashboard(QWidget):
         self.p = None
 
         #Layout Initalisierung
-        self.verticalLayout = QVBoxLayout(parent)
+        self.verticalLayout = QVBoxLayout(self)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.setLayout(self.verticalLayout)
         self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
         self.verticalLayout.addItem(self.verticalSpacer_2)
 
         #Titel
-        self.label = QLabel()
+        self.label = QLabel(self)
         self.label.setObjectName(u"label")
         font = QFont()
         font.setPointSize(28)
@@ -31,7 +33,7 @@ class Dashboard(QWidget):
         #pH-Sektion
         self.horizontalLayout_pH = QHBoxLayout()
         self.horizontalLayout_pH.setObjectName(u"horizontalLayout_pH")
-        self.ph_text = QLabel(parent)
+        self.ph_text = QLabel()
         self.ph_text.setObjectName(u"ph_text")
         font1 = QFont()
         font1.setPointSize(12)
@@ -42,15 +44,15 @@ class Dashboard(QWidget):
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.horizontalLayout_pH.addItem(self.horizontalSpacer)
 
-        self.pH_value = QLabel(parent)
+        self.pH_value = QLabel()
         self.pH_value.setObjectName(u"pH_value")
         self.horizontalLayout_pH.addWidget(self.pH_value)
 
-        self.pH_measure_box = QCheckBox(parent)
+        self.pH_measure_box = QCheckBox()
         self.pH_measure_box.setObjectName(u"pH_measure_box")
         self.horizontalLayout_pH.addWidget(self.pH_measure_box)
 
-        self.pH_record_box = QCheckBox(parent)
+        self.pH_record_box = QCheckBox()
         self.pH_record_box.setObjectName(u"pH_record_box")
         self.horizontalLayout_pH.addWidget(self.pH_record_box)
 
@@ -59,7 +61,7 @@ class Dashboard(QWidget):
         #conductivity-Sektion
         self.horizontalLayout_conductivity = QHBoxLayout()
         self.horizontalLayout_conductivity.setObjectName(u"horizontalLayout_conductivity")
-        self.conductivity_text = QLabel(parent)
+        self.conductivity_text = QLabel()
         self.conductivity_text.setObjectName(u"conductivity_text")
         self.conductivity_text.setFont(font1)
         self.horizontalLayout_conductivity.addWidget(self.conductivity_text)
@@ -67,15 +69,15 @@ class Dashboard(QWidget):
         self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.horizontalLayout_conductivity.addItem(self.horizontalSpacer_2)
 
-        self.conductivity_value = QLabel(parent)
+        self.conductivity_value = QLabel()
         self.conductivity_value.setObjectName(u"conductivity_value")
         self.horizontalLayout_conductivity.addWidget(self.conductivity_value)
 
-        self.conductivity_measure_box = QCheckBox(parent)
+        self.conductivity_measure_box = QCheckBox()
         self.conductivity_measure_box.setObjectName(u"conductivity_measure_box")
         self.horizontalLayout_conductivity.addWidget(self.conductivity_measure_box)
 
-        self.conductivity_record_box = QCheckBox(parent)
+        self.conductivity_record_box = QCheckBox()
         self.conductivity_record_box.setObjectName(u"conductivity_record_box")
         self.horizontalLayout_conductivity.addWidget(self.conductivity_record_box)
 
@@ -84,7 +86,7 @@ class Dashboard(QWidget):
         #temperature-Sektion
         self.horizontalLayout_temperature = QHBoxLayout()
         self.horizontalLayout_temperature.setObjectName(u"horizontalLayout_temperature")
-        self.temperature_text = QLabel(parent)
+        self.temperature_text = QLabel()
         self.temperature_text.setObjectName(u"temperature_text")
         self.temperature_text.setFont(font1)
         self.horizontalLayout_temperature.addWidget(self.temperature_text)
@@ -92,15 +94,15 @@ class Dashboard(QWidget):
         self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.horizontalLayout_temperature.addItem(self.horizontalSpacer_3)
 
-        self.temperature_value = QLabel(parent)
+        self.temperature_value = QLabel()
         self.temperature_value.setObjectName(u"temperature_value")
         self.horizontalLayout_temperature.addWidget(self.temperature_value)
 
-        self.temperature_measure_box = QCheckBox(parent)
+        self.temperature_measure_box = QCheckBox()
         self.temperature_measure_box.setObjectName(u"temperature_measure_box")
         self.horizontalLayout_temperature.addWidget(self.temperature_measure_box)
 
-        self.temperature_record_box = QCheckBox(parent)
+        self.temperature_record_box = QCheckBox()
         self.temperature_record_box.setObjectName(u"temperature_record_box")
         self.horizontalLayout_temperature.addWidget(self.temperature_record_box)
 
@@ -111,11 +113,11 @@ class Dashboard(QWidget):
         self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.measure_control_layout.addItem(self.horizontalSpacer_4)
 
-        self.button_start_measure = QPushButton(parent)
+        self.button_start_measure = QPushButton()
         self.button_start_measure.setObjectName(u"button_start_measure")
         self.measure_control_layout.addWidget(self.button_start_measure)
 
-        self.button_stop_measure = QPushButton(parent)
+        self.button_stop_measure = QPushButton()
         self.button_stop_measure.setObjectName(u"button_stop_measure")
         self.measure_control_layout.addWidget(self.button_stop_measure)
         self.button_stop_measure.setEnabled(False)
@@ -156,12 +158,14 @@ class Dashboard(QWidget):
         self.p.readyReadStandardOutput.connect(self.handle_stdout)
         self.p.readyReadStandardError.connect(self.handle_stderr)
         self.toggle_measure_boxes()
+        self.status_signal.emit("start measure loop")
         self.p.start("python3",['measure_loop.py'])
 
     def stop_measure(self):
-        print("send terminate sensor_loop...")
+        self.status_signal.emit("stop measure loop")
         self.p.terminate()
         if not self.p.waitForFinished(500):
+            self.status_signal.emit("kill measure loop")
             self.p.kill()
 
     def handle_stdout(self):
@@ -169,6 +173,19 @@ class Dashboard(QWidget):
         stdout = bytes(data).decode("utf8")
         split_data = stdout.split()
         print(split_data)
+        try:
+            timestamp = split_data[1].split(":")[1]
+        except IndexError:
+            pass
+        if split_data[1].split(":")[0] == "Timestamp":
+            if self.pH_measure_box.isChecked():
+                self.pH_value.setText(timestamp)
+            if self.conductivity_measure_box.isChecked():
+                self.conductivity_value.setText(timestamp)
+            if self.temperature_measure_box.isChecked():
+                self.temperature_value.setText(timestamp)
+        #S1:pH|S2:conduct|S3:temp
+
 
     def handle_stderr(self):
         data = self.p.readAllStandardError()
