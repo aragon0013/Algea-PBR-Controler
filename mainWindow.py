@@ -4,6 +4,7 @@ from PyQt6.QtWidgets import *
 from PyQt6.QtCore import *
 import dialogs
 from simplePage import SimplePage
+from Dashboard import Dashboard
 
 class PBRMainWindow(QMainWindow):
     def __init__(self, parent=None):
@@ -34,7 +35,7 @@ class PBRMainWindow(QMainWindow):
         self.stack = QStackedWidget()
         self.setCentralWidget(self.stack)
         self.pages = [
-            SimplePage("Platzhalter Dasbhoard","das ist ein Test"),
+            Dashboard(),
             SimplePage("Platzhalter Sensoren","sdklajföksad")
         ]
         for p in self.pages:
