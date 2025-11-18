@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'dashboardVUNsFI.ui'
+## Form generated from reading UI file 'dashboardTooEso.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.3
 ##
@@ -16,7 +16,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QCheckBox, QHBoxLayout, QLabel,
-    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
+    QPushButton, QSizePolicy, QSpacerItem, QVBoxLayout,
+    QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -135,6 +136,25 @@ class Ui_Form(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout_temperature)
 
+        self.measure_control_layout = QHBoxLayout()
+        self.measure_control_layout.setObjectName(u"measure_control_layout")
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.measure_control_layout.addItem(self.horizontalSpacer_4)
+
+        self.button_start_measure = QPushButton(self.verticalLayoutWidget)
+        self.button_start_measure.setObjectName(u"button_start_measure")
+
+        self.measure_control_layout.addWidget(self.button_start_measure)
+
+        self.button_stop_measure = QPushButton(self.verticalLayoutWidget)
+        self.button_stop_measure.setObjectName(u"button_stop_measure")
+
+        self.measure_control_layout.addWidget(self.button_stop_measure)
+
+
+        self.verticalLayout.addLayout(self.measure_control_layout)
+
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout.addItem(self.verticalSpacer)
@@ -160,5 +180,7 @@ class Ui_Form(object):
         self.temperature_value.setText(QCoreApplication.translate("Form", u"pH-value", None))
         self.temperature_measure_box.setText(QCoreApplication.translate("Form", u"measure", None))
         self.temperature_record_box.setText(QCoreApplication.translate("Form", u"record", None))
+        self.button_start_measure.setText(QCoreApplication.translate("Form", u"start measure", None))
+        self.button_stop_measure.setText(QCoreApplication.translate("Form", u"stop measure", None))
     # retranslateUi
 
