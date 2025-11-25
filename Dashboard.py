@@ -168,7 +168,7 @@ class Dashboard(QWidget):
             self.status_signal.emit("kill measure loop")
             self.p.kill()
 
-    def handle_stdout(self):
+    def handle_stdout_old(self):
         data = self.p.readAllStandardOutput()
         stdout = bytes(data).decode("utf8")
         split_data = stdout.split()
@@ -185,6 +185,11 @@ class Dashboard(QWidget):
             if self.temperature_measure_box.isChecked():
                 self.temperature_value.setText(timestamp)
         #S1:pH|S2:conduct|S3:temp
+
+    def handle_stdout(self):
+        data = self.p.readAllStandardOutput()
+        stdout = bytes(data).decode("utf8")
+        print(stdout)
 
 
     def handle_stderr(self):
