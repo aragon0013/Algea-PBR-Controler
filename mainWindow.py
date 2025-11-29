@@ -5,6 +5,7 @@ from PyQt6.QtCore import *
 import dialogs
 from simplePage import SimplePage
 from Dashboard import Dashboard
+from pH_calibration import pHCalibration
 
 class PBRMainWindow(QMainWindow):
     def __init__(self, parent=None):
@@ -36,6 +37,7 @@ class PBRMainWindow(QMainWindow):
         self.setCentralWidget(self.stack)
         self.pages = [
             Dashboard(self),
+            pHCalibration(self),
             SimplePage("Platzhalter Sensoren","sdklajföksad")
         ]
         for p in self.pages:
@@ -74,13 +76,13 @@ class PBRMainWindow(QMainWindow):
     def dashboard(self):
         self.stack.setCurrentIndex(0)
     def processControl(self):
-        self.stack.setCurrentIndex(1)
+        self.stack.setCurrentIndex(2)
     def lightControl(self):
         pass
     def sensorControl(self):
         pass
     def sensorCalControl(self):
-        pass
+        self.stack.setCurrentIndex(1)
     def about(self):
         message = dialogs.AboutBox()
         message.exec()
