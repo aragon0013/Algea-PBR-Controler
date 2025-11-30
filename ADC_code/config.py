@@ -68,7 +68,7 @@ class RaspberryPi:
         self.GPIO.setup(self.DRDY_PIN, self.GPIO.IN, pull_up_down=self.GPIO.PUD_UP)
         self.SPI.max_speed_hz = 2000000
         self.SPI.mode = 0b01
-        return 0;
+        return 0
 
     def module_exit(self):
         self.SPI.close()
@@ -124,7 +124,7 @@ class JetsonNano:
 hostname = os.popen("uname -n").read().strip()
         
 #if os.path.exists('/sys/bus/platform/drivers/gpiomem-bcm2835'):
-if hostname == "raspberrypi":
+if hostname == "pbr-raspi":
     implementation = RaspberryPi()
 else:
     implementation = JetsonNano()

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'pH_CalibrationzKTAdZ.ui'
+## Form generated from reading UI file 'pH_Calibrationnfzrxw.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.3
 ##
@@ -15,9 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QGridLayout, QHBoxLayout, QLabel,
-    QPushButton, QSizePolicy, QSpacerItem, QVBoxLayout,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
+    QLabel, QPushButton, QSizePolicy, QSpacerItem,
+    QVBoxLayout, QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -124,25 +124,39 @@ class Ui_Form(object):
 
         self.gridLayout_2 = QGridLayout()
         self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.label_ph_stabw_value = QLabel(self.verticalLayoutWidget)
-        self.label_ph_stabw_value.setObjectName(u"label_ph_stabw_value")
+        self.label_ph_relstabw_text = QLabel(self.verticalLayoutWidget)
+        self.label_ph_relstabw_text.setObjectName(u"label_ph_relstabw_text")
 
-        self.gridLayout_2.addWidget(self.label_ph_stabw_value, 1, 1, 1, 1)
+        self.gridLayout_2.addWidget(self.label_ph_relstabw_text, 2, 0, 1, 1)
+
+        self.label_ph_slope_value = QLabel(self.verticalLayoutWidget)
+        self.label_ph_slope_value.setObjectName(u"label_ph_slope_value")
+
+        self.gridLayout_2.addWidget(self.label_ph_slope_value, 4, 1, 1, 1)
+
+        self.label_ph_slope_text = QLabel(self.verticalLayoutWidget)
+        self.label_ph_slope_text.setObjectName(u"label_ph_slope_text")
+
+        self.gridLayout_2.addWidget(self.label_ph_slope_text, 4, 0, 1, 1)
+
+        self.verticalSpacer_2 = QSpacerItem(20, 8, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+
+        self.gridLayout_2.addItem(self.verticalSpacer_2, 6, 0, 1, 1)
+
+        self.label_ph_mean_text = QLabel(self.verticalLayoutWidget)
+        self.label_ph_mean_text.setObjectName(u"label_ph_mean_text")
+
+        self.gridLayout_2.addWidget(self.label_ph_mean_text, 0, 0, 1, 1)
 
         self.label_ph_stabw_text = QLabel(self.verticalLayoutWidget)
         self.label_ph_stabw_text.setObjectName(u"label_ph_stabw_text")
 
         self.gridLayout_2.addWidget(self.label_ph_stabw_text, 1, 0, 1, 1)
 
-        self.label_ph_relstabw_text = QLabel(self.verticalLayoutWidget)
-        self.label_ph_relstabw_text.setObjectName(u"label_ph_relstabw_text")
+        self.label_ph_offset_text = QLabel(self.verticalLayoutWidget)
+        self.label_ph_offset_text.setObjectName(u"label_ph_offset_text")
 
-        self.gridLayout_2.addWidget(self.label_ph_relstabw_text, 2, 0, 1, 1)
-
-        self.label_ph_relstabw_value = QLabel(self.verticalLayoutWidget)
-        self.label_ph_relstabw_value.setObjectName(u"label_ph_relstabw_value")
-
-        self.gridLayout_2.addWidget(self.label_ph_relstabw_value, 2, 1, 1, 1)
+        self.gridLayout_2.addWidget(self.label_ph_offset_text, 5, 0, 1, 1)
 
         self.label_ph_mean_value = QLabel(self.verticalLayoutWidget)
         self.label_ph_mean_value.setObjectName(u"label_ph_mean_value")
@@ -152,20 +166,33 @@ class Ui_Form(object):
         self.pushButton_reset_ph = QPushButton(self.verticalLayoutWidget)
         self.pushButton_reset_ph.setObjectName(u"pushButton_reset_ph")
 
-        self.gridLayout_2.addWidget(self.pushButton_reset_ph, 4, 0, 1, 1)
-
-        self.label_ph_mean_text = QLabel(self.verticalLayoutWidget)
-        self.label_ph_mean_text.setObjectName(u"label_ph_mean_text")
-
-        self.gridLayout_2.addWidget(self.label_ph_mean_text, 0, 0, 1, 1)
-
-        self.verticalSpacer_2 = QSpacerItem(20, 70, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Preferred)
-
-        self.gridLayout_2.addItem(self.verticalSpacer_2, 3, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.pushButton_reset_ph, 7, 0, 1, 1)
 
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_2.addItem(self.horizontalSpacer, 1, 2, 1, 1)
+
+        self.label_ph_relstabw_value = QLabel(self.verticalLayoutWidget)
+        self.label_ph_relstabw_value.setObjectName(u"label_ph_relstabw_value")
+
+        self.gridLayout_2.addWidget(self.label_ph_relstabw_value, 2, 1, 1, 1)
+
+        self.label_ph_stabw_value = QLabel(self.verticalLayoutWidget)
+        self.label_ph_stabw_value.setObjectName(u"label_ph_stabw_value")
+
+        self.gridLayout_2.addWidget(self.label_ph_stabw_value, 1, 1, 1, 1)
+
+        self.label_ph_offset_value = QLabel(self.verticalLayoutWidget)
+        self.label_ph_offset_value.setObjectName(u"label_ph_offset_value")
+
+        self.gridLayout_2.addWidget(self.label_ph_offset_value, 5, 1, 1, 1)
+
+        self.line = QFrame(self.verticalLayoutWidget)
+        self.line.setObjectName(u"line")
+        self.line.setFrameShape(QFrame.Shape.HLine)
+        self.line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.gridLayout_2.addWidget(self.line, 3, 0, 1, 3)
 
 
         self.vLayout_pH_main.addLayout(self.gridLayout_2)
@@ -185,22 +212,26 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         self.pH_cal_win_title.setText(QCoreApplication.translate("Form", u"pH Calibration Window", None))
-        self.label_v_relstabw_text.setText(QCoreApplication.translate("Form", u"rel. Stabw", None))
+        self.label_v_relstabw_text.setText(QCoreApplication.translate("Form", u"rel. Stabw.:", None))
         self.label_v_relstabw_value.setText(QCoreApplication.translate("Form", u"NULL", None))
         self.pushButton_set_calp2.setText(QCoreApplication.translate("Form", u"Set P2", None))
         self.pushButton_set_calp1.setText(QCoreApplication.translate("Form", u"Set P1", None))
-        self.label_v_stabw_text.setText(QCoreApplication.translate("Form", u"Stabw", None))
+        self.label_v_stabw_text.setText(QCoreApplication.translate("Form", u"Stabw.:", None))
         self.pushButton_reset_calibration.setText(QCoreApplication.translate("Form", u"Reset Calibration", None))
-        self.label_v_mean_text.setText(QCoreApplication.translate("Form", u"Mean", None))
+        self.label_v_mean_text.setText(QCoreApplication.translate("Form", u"Mean:", None))
         self.label_v_stabw_value.setText(QCoreApplication.translate("Form", u"NULL", None))
         self.lavel_v_mean_value.setText(QCoreApplication.translate("Form", u"NULL", None))
         self.pushButton_reset_measurement.setText(QCoreApplication.translate("Form", u"Reset Measure", None))
-        self.label_ph_stabw_value.setText(QCoreApplication.translate("Form", u"TextLabel", None))
-        self.label_ph_stabw_text.setText(QCoreApplication.translate("Form", u"TextLabel", None))
-        self.label_ph_relstabw_text.setText(QCoreApplication.translate("Form", u"TextLabel", None))
-        self.label_ph_relstabw_value.setText(QCoreApplication.translate("Form", u"TextLabel", None))
-        self.label_ph_mean_value.setText(QCoreApplication.translate("Form", u"TextLabel", None))
+        self.label_ph_relstabw_text.setText(QCoreApplication.translate("Form", u"rel. Stabw.:", None))
+        self.label_ph_slope_value.setText(QCoreApplication.translate("Form", u"NULL", None))
+        self.label_ph_slope_text.setText(QCoreApplication.translate("Form", u"Slope:", None))
+        self.label_ph_mean_text.setText(QCoreApplication.translate("Form", u"Mean:", None))
+        self.label_ph_stabw_text.setText(QCoreApplication.translate("Form", u"Stabw.:", None))
+        self.label_ph_offset_text.setText(QCoreApplication.translate("Form", u"TextLabel:", None))
+        self.label_ph_mean_value.setText(QCoreApplication.translate("Form", u"NULL", None))
         self.pushButton_reset_ph.setText(QCoreApplication.translate("Form", u"Reset pH Graph", None))
-        self.label_ph_mean_text.setText(QCoreApplication.translate("Form", u"TextLabel", None))
+        self.label_ph_relstabw_value.setText(QCoreApplication.translate("Form", u"NULL", None))
+        self.label_ph_stabw_value.setText(QCoreApplication.translate("Form", u"NULL", None))
+        self.label_ph_offset_value.setText(QCoreApplication.translate("Form", u"NULL", None))
     # retranslateUi
 

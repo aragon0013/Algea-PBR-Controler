@@ -6,10 +6,23 @@ import dialogs
 from simplePage import SimplePage
 from Dashboard import Dashboard
 from pH_calibration import pHCalibration
+from signal_handler import signal_manager
 
 class PBRMainWindow(QMainWindow):
     def __init__(self, parent=None):
         super(PBRMainWindow, self).__init__(parent)
+
+        #Subwidget Initialisieren
+        self.pages = [
+            Dashboard(parent=self),
+            pHCalibration(self),
+            SimplePage("Platzhalter Sensoren","sdklajföksad")
+        ]
+
+        #Platzhalter für Subprozesse
+        self.p = None
+        ##Signal weiterleitung
+        ###signal_manager.status_signal.connect(self.pages[1].measure_started)
 
         #Menü initalisierung
         pbrOS_menu = self.menuBar().addMenu("PBR OS")
@@ -23,7 +36,7 @@ class PBRMainWindow(QMainWindow):
         sensor_action = self.addAction("Sensor Control",self.sensorControl)
         sensorCal_action = self.addAction("Sensor Calibration",self.sensorCalControl)
         pbrWindow_toAdd = (
-            dashboard_action,process_action,light_action,sensor_action,sensorCal_action
+            dashboard_action,sensorCal_action#,process_action,light_action,sensor_action
         )
         for action in pbrWindow_toAdd:
             pbrWindow_menu.addAction(action)
@@ -35,11 +48,6 @@ class PBRMainWindow(QMainWindow):
         #Fenster Initialisierung
         self.stack = QStackedWidget()
         self.setCentralWidget(self.stack)
-        self.pages = [
-            Dashboard(self),
-            pHCalibration(self),
-            SimplePage("Platzhalter Sensoren","sdklajföksad")
-        ]
         for p in self.pages:
             eff = QGraphicsOpacityEffect(p)
             p.setGraphicsEffect(eff)
@@ -54,7 +62,9 @@ class PBRMainWindow(QMainWindow):
         status.addPermanentWidget(self.sizeLabel)
         status.showMessage("Ready",0)
         ##Statusbar Benachrichtigungen Initalisieren
-        self.pages[0].status_signal.connect(self.statusBar().showMessage)
+        signal_manager.measurement_started.connect(self.statusBar().showMessage)
+        signal_manager.measurement_stopped.connect(self.statusBar().showMessage)
+        signal_manager.measurement_killed.connect(self.statusBar().showMessage)
 
     def addAction(self, text, slot=None, shortcut=None, icon=None, tip=None, checkable=False):
         action = QAction(text,self)

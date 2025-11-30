@@ -1,17 +1,24 @@
 import sys
 import time
+import csv
+from datetime import datetime
 from PyQt6.QtCore import *
 from PyQt6.QtGui import *
 from PyQt6.QtWidgets import *
+from signal_handler import signal_manager
 
 class Dashboard(QWidget):
-    status_signal = pyqtSignal(str)
+    #status_signal = pyqtSignal(str) 
+    #wird nicht mehr gebraucht, da zentraler SignalManager verwendet wird
 
     def __init__(self,parent=None):
         super(Dashboard, self).__init__(parent)
 
         #Prozesshalter für Sensor Loop
-        self.p = None
+        #self.p = None #wird nicht mehr gebraucht da auslagerung zu MainWindow
+
+        #Parent Initalisierung
+        self.parent = parent
 
         #Layout Initalisierung
         self.verticalLayout = QVBoxLayout(self)
@@ -54,6 +61,7 @@ class Dashboard(QWidget):
 
         self.pH_record_box = QCheckBox()
         self.pH_record_box.setObjectName(u"pH_record_box")
+        self.pH_record_box.setEnabled(False)
         self.horizontalLayout_pH.addWidget(self.pH_record_box)
 
         self.verticalLayout.addLayout(self.horizontalLayout_pH)
@@ -79,6 +87,7 @@ class Dashboard(QWidget):
 
         self.conductivity_record_box = QCheckBox()
         self.conductivity_record_box.setObjectName(u"conductivity_record_box")
+        self.conductivity_record_box.setEnabled(False)
         self.horizontalLayout_conductivity.addWidget(self.conductivity_record_box)
 
         self.verticalLayout.addLayout(self.horizontalLayout_conductivity)
@@ -104,6 +113,7 @@ class Dashboard(QWidget):
 
         self.temperature_record_box = QCheckBox()
         self.temperature_record_box.setObjectName(u"temperature_record_box")
+        self.temperature_record_box.setEnabled(False)
         self.horizontalLayout_temperature.addWidget(self.temperature_record_box)
 
         self.verticalLayout.addLayout(self.horizontalLayout_temperature)
@@ -129,9 +139,18 @@ class Dashboard(QWidget):
 
         self.retranslateUi(self)
         
-        #Funktionen Connecten
+        #Slots Connecten
         self.button_start_measure.pressed.connect(self.start_measure)
         self.button_stop_measure.pressed.connect(self.stop_measure)
+        self.pH_measure_box.stateChanged.connect(self.handle_measure_toggling)
+        self.conductivity_measure_box.stateChanged.connect(self.handle_measure_toggling)
+        self.temperature_measure_box.stateChanged.connect(self.handle_measure_toggling)
+        self.pH_record_box.stateChanged.connect(self.handle_record_toggling)
+        self.conductivity_record_box.stateChanged.connect(self.handle_record_toggling)
+        self.temperature_record_box.stateChanged.connect(self.handle_record_toggling)
+
+        #Signale Bearbeiten
+        signal_manager.new_ph_value_calculated.connect(self.update_ph_value)
         
 
     def retranslateUi(self, Form):
@@ -153,23 +172,23 @@ class Dashboard(QWidget):
         self.button_stop_measure.setText(QCoreApplication.translate("Form", u"stop measure", None))
 
     def start_measure(self):
-        self.p = QProcess()
-        self.p.finished.connect(self.measure_finished)
-        self.p.readyReadStandardOutput.connect(self.handle_stdout)
-        self.p.readyReadStandardError.connect(self.handle_stderr)
+        self.parent.p = QProcess()
+        self.parent.p.finished.connect(self.measure_finished)
+        self.parent.p.readyReadStandardOutput.connect(self.handle_stdout)
+        self.parent.p.readyReadStandardError.connect(self.handle_stderr)
         self.toggle_measure_boxes()
-        self.status_signal.emit("start measure loop")
-        self.p.start("python3",['measure_loop.py'])
+        signal_manager.measurement_started.emit("start measure loop")
+        self.parent.p.start("python3",['measure_loop.py'])
 
     def stop_measure(self):
-        self.status_signal.emit("stop measure loop")
-        self.p.terminate()
-        if not self.p.waitForFinished(500):
-            self.status_signal.emit("kill measure loop")
-            self.p.kill()
+        signal_manager.measurement_stopped.emit("stop measure loop")
+        self.parent.p.terminate()
+        if not self.parent.p.waitForFinished(500):
+            signal_manager.measurement_killed.emit("kill measure loop")
+            self.parent.p.kill()
 
     def handle_stdout_old(self):
-        data = self.p.readAllStandardOutput()
+        data = self.parent.p.readAllStandardOutput()
         stdout = bytes(data).decode("utf8")
         split_data = stdout.split()
         print(split_data)
@@ -187,15 +206,61 @@ class Dashboard(QWidget):
         #S1:pH|S2:conduct|S3:temp
 
     def handle_stdout(self):
-        data = self.p.readAllStandardOutput()
+        data = self.parent.p.readAllStandardOutput()
         stdout = bytes(data).decode("utf8")
         print(stdout)
-
+        
+        timestamp = datetime.now().strftime("%Y:%m:%d-%H:%M:%S")
+        lines = stdout.split("\n")
+        for line in lines:
+            if "ADC1" in line:
+                elements = line.split(",")
+                measure_value = float(elements[2])
+                signal_manager.measure_signal.emit([timestamp,measure_value])
+        """
+        splitted_stdout = stdout.split(",")
+        if len(splitted_stdout) >= 3:
+            if splitted_stdout[0] == "ADC1":
+                measure_value = float(splitted_stdout[2])
+                signal_manager.measure_signal.emit([timestamp,measure_value])
+        """
 
     def handle_stderr(self):
-        data = self.p.readAllStandardError()
+        data = self.parent.p.readAllStandardError()
         stderr = bytes(data).decode("utf8")
         print(stderr)
+
+    def handle_measure_toggling(self):
+        if self.pH_measure_box.isChecked():
+            self.pH_record_box.setEnabled(True)
+        else:
+            self.pH_record_box.setEnabled(False)
+
+        if self.conductivity_measure_box.isChecked():
+            self.conductivity_record_box.setEnabled(True)
+        else:
+            self.conductivity_record_box.setEnabled(False)
+
+        if self.temperature_measure_box.isChecked():
+            self.temperature_record_box.setEnabled(True)
+        else:
+            self.temperature_record_box.setEnabled(False)
+
+    def handle_record_toggling(self):
+        if self.pH_record_box.isChecked():
+            self.pH_measure_box.setEnabled(False)
+        else:
+            self.pH_measure_box.setEnabled(True)
+
+        if self.conductivity_record_box.isChecked():
+            self.conductivity_measure_box.setEnabled(False)
+        else:
+            self.conductivity_measure_box.setEnabled(True)
+
+        if self.temperature_record_box.isChecked():
+            self.temperature_measure_box.setEnabled(False)
+        else:
+            self.temperature_measure_box.setEnabled(True)
 
     def measure_finished(self):
         print("Messungen erfolgreich beendet")
@@ -214,6 +279,23 @@ class Dashboard(QWidget):
         else:
             self.button_stop_measure.setEnabled(True)
 
+    def update_ph_value(self, passed_data):
+        print("Neuer ph Wert empfangen!")
+        try:
+            value = round(float(passed_data),4)
+            if self.pH_measure_box.isChecked():
+                self.pH_value.setText(str(value))
+            if self.pH_record_box.isChecked():
+                self.record_measure_data("pH",value)
+        except ValueError:
+            print("ein komischer pH Wert wurde übermittelt!")
+    
+    def record_measure_data(self, value_type, value):
+        timestamp = datetime.now().strftime("%d %m %Y,%H:%M:%S")
+        timestamp_date, timestamp_time = timestamp.split(",")
+        with open(f"{value_type}.csv","a",newline="",encoding="utf-8") as file:
+            writer = csv.writer(file)
+            writer.writerow([timestamp_date,timestamp_time,value])
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
