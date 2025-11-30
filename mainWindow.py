@@ -3,10 +3,26 @@ from PyQt6.QtGui import *
 from PyQt6.QtWidgets import *
 from PyQt6.QtCore import *
 import dialogs
+from simplePage import SimplePage
+from Dashboard import Dashboard
+from pH_calibration import pHCalibration
+from signal_handler import signal_manager
 
 class PBRMainWindow(QMainWindow):
     def __init__(self, parent=None):
         super(PBRMainWindow, self).__init__(parent)
+
+        #Subwidget Initialisieren
+        self.pages = [
+            Dashboard(parent=self),
+            pHCalibration(self),
+            SimplePage("Platzhalter Sensoren","sdklajföksad")
+        ]
+
+        #Platzhalter für Subprozesse
+        self.p = None
+        ##Signal weiterleitung
+        ###signal_manager.status_signal.connect(self.pages[1].measure_started)
 
         #Menü initalisierung
         pbrOS_menu = self.menuBar().addMenu("PBR OS")
@@ -20,7 +36,7 @@ class PBRMainWindow(QMainWindow):
         sensor_action = self.addAction("Sensor Control",self.sensorControl)
         sensorCal_action = self.addAction("Sensor Calibration",self.sensorCalControl)
         pbrWindow_toAdd = (
-            dashboard_action,process_action,light_action,sensor_action,sensorCal_action
+            dashboard_action,sensorCal_action#,process_action,light_action,sensor_action
         )
         for action in pbrWindow_toAdd:
             pbrWindow_menu.addAction(action)
@@ -28,6 +44,15 @@ class PBRMainWindow(QMainWindow):
         extras_menu = self.menuBar().addMenu("Extras")
         about_action = self.addAction("About",self.about)
         extras_menu.addAction(about_action)
+
+        #Fenster Initialisierung
+        self.stack = QStackedWidget()
+        self.setCentralWidget(self.stack)
+        for p in self.pages:
+            eff = QGraphicsOpacityEffect(p)
+            p.setGraphicsEffect(eff)
+            eff.setOpacity(1.0)
+            self.stack.addWidget(p)
         
         #Statusbar Initalisierung
         self.sizeLabel = QLabel()
@@ -36,6 +61,10 @@ class PBRMainWindow(QMainWindow):
         status = self.statusBar()
         status.addPermanentWidget(self.sizeLabel)
         status.showMessage("Ready",0)
+        ##Statusbar Benachrichtigungen Initalisieren
+        signal_manager.measurement_started.connect(self.statusBar().showMessage)
+        signal_manager.measurement_stopped.connect(self.statusBar().showMessage)
+        signal_manager.measurement_killed.connect(self.statusBar().showMessage)
 
     def addAction(self, text, slot=None, shortcut=None, icon=None, tip=None, checkable=False):
         action = QAction(text,self)
@@ -55,15 +84,15 @@ class PBRMainWindow(QMainWindow):
     def close_app(self):
         self.close()
     def dashboard(self):
-        pass
+        self.stack.setCurrentIndex(0)
     def processControl(self):
-        pass
+        self.stack.setCurrentIndex(2)
     def lightControl(self):
         pass
     def sensorControl(self):
         pass
     def sensorCalControl(self):
-        pass
+        self.stack.setCurrentIndex(1)
     def about(self):
         message = dialogs.AboutBox()
         message.exec()

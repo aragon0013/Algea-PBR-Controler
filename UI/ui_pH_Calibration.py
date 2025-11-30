@@ -1,0 +1,237 @@
+# -*- coding: utf-8 -*-
+
+################################################################################
+## Form generated from reading UI file 'pH_Calibrationnfzrxw.ui'
+##
+## Created by: Qt User Interface Compiler version 6.9.3
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
+
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
+    QLabel, QPushButton, QSizePolicy, QSpacerItem,
+    QVBoxLayout, QWidget)
+
+class Ui_Form(object):
+    def setupUi(self, Form):
+        if not Form.objectName():
+            Form.setObjectName(u"Form")
+        Form.resize(640, 481)
+        self.verticalLayoutWidget = QWidget(Form)
+        self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
+        self.verticalLayoutWidget.setGeometry(QRect(10, 10, 611, 451))
+        self.MainLayout = QVBoxLayout(self.verticalLayoutWidget)
+        self.MainLayout.setObjectName(u"MainLayout")
+        self.MainLayout.setContentsMargins(0, 0, 0, 0)
+        self.pH_cal_win_title = QLabel(self.verticalLayoutWidget)
+        self.pH_cal_win_title.setObjectName(u"pH_cal_win_title")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pH_cal_win_title.sizePolicy().hasHeightForWidth())
+        self.pH_cal_win_title.setSizePolicy(sizePolicy)
+        font = QFont()
+        font.setPointSize(24)
+        font.setBold(True)
+        self.pH_cal_win_title.setFont(font)
+
+        self.MainLayout.addWidget(self.pH_cal_win_title)
+
+        self.hLayout_v_pH = QHBoxLayout()
+        self.hLayout_v_pH.setObjectName(u"hLayout_v_pH")
+        self.vLayout_v_main = QVBoxLayout()
+        self.vLayout_v_main.setObjectName(u"vLayout_v_main")
+        self.w_placeh_v_graph = QWidget(self.verticalLayoutWidget)
+        self.w_placeh_v_graph.setObjectName(u"w_placeh_v_graph")
+
+        self.vLayout_v_main.addWidget(self.w_placeh_v_graph)
+
+        self.gridLayout = QGridLayout()
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.label_v_relstabw_text = QLabel(self.verticalLayoutWidget)
+        self.label_v_relstabw_text.setObjectName(u"label_v_relstabw_text")
+
+        self.gridLayout.addWidget(self.label_v_relstabw_text, 2, 0, 1, 1)
+
+        self.label_v_relstabw_value = QLabel(self.verticalLayoutWidget)
+        self.label_v_relstabw_value.setObjectName(u"label_v_relstabw_value")
+
+        self.gridLayout.addWidget(self.label_v_relstabw_value, 2, 1, 1, 1)
+
+        self.pushButton_set_calp2 = QPushButton(self.verticalLayoutWidget)
+        self.pushButton_set_calp2.setObjectName(u"pushButton_set_calp2")
+
+        self.gridLayout.addWidget(self.pushButton_set_calp2, 4, 2, 1, 1)
+
+        self.pushButton_set_calp1 = QPushButton(self.verticalLayoutWidget)
+        self.pushButton_set_calp1.setObjectName(u"pushButton_set_calp1")
+
+        self.gridLayout.addWidget(self.pushButton_set_calp1, 4, 1, 1, 1)
+
+        self.label_v_stabw_text = QLabel(self.verticalLayoutWidget)
+        self.label_v_stabw_text.setObjectName(u"label_v_stabw_text")
+
+        self.gridLayout.addWidget(self.label_v_stabw_text, 1, 0, 1, 1)
+
+        self.pushButton_reset_calibration = QPushButton(self.verticalLayoutWidget)
+        self.pushButton_reset_calibration.setObjectName(u"pushButton_reset_calibration")
+
+        self.gridLayout.addWidget(self.pushButton_reset_calibration, 5, 0, 1, 3)
+
+        self.label_v_mean_text = QLabel(self.verticalLayoutWidget)
+        self.label_v_mean_text.setObjectName(u"label_v_mean_text")
+
+        self.gridLayout.addWidget(self.label_v_mean_text, 0, 0, 1, 1)
+
+        self.label_v_stabw_value = QLabel(self.verticalLayoutWidget)
+        self.label_v_stabw_value.setObjectName(u"label_v_stabw_value")
+
+        self.gridLayout.addWidget(self.label_v_stabw_value, 1, 1, 1, 1)
+
+        self.lavel_v_mean_value = QLabel(self.verticalLayoutWidget)
+        self.lavel_v_mean_value.setObjectName(u"lavel_v_mean_value")
+
+        self.gridLayout.addWidget(self.lavel_v_mean_value, 0, 1, 1, 1)
+
+        self.pushButton_reset_measurement = QPushButton(self.verticalLayoutWidget)
+        self.pushButton_reset_measurement.setObjectName(u"pushButton_reset_measurement")
+
+        self.gridLayout.addWidget(self.pushButton_reset_measurement, 4, 0, 1, 1)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout.addItem(self.verticalSpacer, 3, 0, 1, 1)
+
+
+        self.vLayout_v_main.addLayout(self.gridLayout)
+
+
+        self.hLayout_v_pH.addLayout(self.vLayout_v_main)
+
+        self.vLayout_pH_main = QVBoxLayout()
+        self.vLayout_pH_main.setObjectName(u"vLayout_pH_main")
+        self.w_placeh_pH_graph = QWidget(self.verticalLayoutWidget)
+        self.w_placeh_pH_graph.setObjectName(u"w_placeh_pH_graph")
+
+        self.vLayout_pH_main.addWidget(self.w_placeh_pH_graph)
+
+        self.gridLayout_2 = QGridLayout()
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.label_ph_relstabw_text = QLabel(self.verticalLayoutWidget)
+        self.label_ph_relstabw_text.setObjectName(u"label_ph_relstabw_text")
+
+        self.gridLayout_2.addWidget(self.label_ph_relstabw_text, 2, 0, 1, 1)
+
+        self.label_ph_slope_value = QLabel(self.verticalLayoutWidget)
+        self.label_ph_slope_value.setObjectName(u"label_ph_slope_value")
+
+        self.gridLayout_2.addWidget(self.label_ph_slope_value, 4, 1, 1, 1)
+
+        self.label_ph_slope_text = QLabel(self.verticalLayoutWidget)
+        self.label_ph_slope_text.setObjectName(u"label_ph_slope_text")
+
+        self.gridLayout_2.addWidget(self.label_ph_slope_text, 4, 0, 1, 1)
+
+        self.verticalSpacer_2 = QSpacerItem(20, 8, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+
+        self.gridLayout_2.addItem(self.verticalSpacer_2, 6, 0, 1, 1)
+
+        self.label_ph_mean_text = QLabel(self.verticalLayoutWidget)
+        self.label_ph_mean_text.setObjectName(u"label_ph_mean_text")
+
+        self.gridLayout_2.addWidget(self.label_ph_mean_text, 0, 0, 1, 1)
+
+        self.label_ph_stabw_text = QLabel(self.verticalLayoutWidget)
+        self.label_ph_stabw_text.setObjectName(u"label_ph_stabw_text")
+
+        self.gridLayout_2.addWidget(self.label_ph_stabw_text, 1, 0, 1, 1)
+
+        self.label_ph_offset_text = QLabel(self.verticalLayoutWidget)
+        self.label_ph_offset_text.setObjectName(u"label_ph_offset_text")
+
+        self.gridLayout_2.addWidget(self.label_ph_offset_text, 5, 0, 1, 1)
+
+        self.label_ph_mean_value = QLabel(self.verticalLayoutWidget)
+        self.label_ph_mean_value.setObjectName(u"label_ph_mean_value")
+
+        self.gridLayout_2.addWidget(self.label_ph_mean_value, 0, 1, 1, 1)
+
+        self.pushButton_reset_ph = QPushButton(self.verticalLayoutWidget)
+        self.pushButton_reset_ph.setObjectName(u"pushButton_reset_ph")
+
+        self.gridLayout_2.addWidget(self.pushButton_reset_ph, 7, 0, 1, 1)
+
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_2.addItem(self.horizontalSpacer, 1, 2, 1, 1)
+
+        self.label_ph_relstabw_value = QLabel(self.verticalLayoutWidget)
+        self.label_ph_relstabw_value.setObjectName(u"label_ph_relstabw_value")
+
+        self.gridLayout_2.addWidget(self.label_ph_relstabw_value, 2, 1, 1, 1)
+
+        self.label_ph_stabw_value = QLabel(self.verticalLayoutWidget)
+        self.label_ph_stabw_value.setObjectName(u"label_ph_stabw_value")
+
+        self.gridLayout_2.addWidget(self.label_ph_stabw_value, 1, 1, 1, 1)
+
+        self.label_ph_offset_value = QLabel(self.verticalLayoutWidget)
+        self.label_ph_offset_value.setObjectName(u"label_ph_offset_value")
+
+        self.gridLayout_2.addWidget(self.label_ph_offset_value, 5, 1, 1, 1)
+
+        self.line = QFrame(self.verticalLayoutWidget)
+        self.line.setObjectName(u"line")
+        self.line.setFrameShape(QFrame.Shape.HLine)
+        self.line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.gridLayout_2.addWidget(self.line, 3, 0, 1, 3)
+
+
+        self.vLayout_pH_main.addLayout(self.gridLayout_2)
+
+
+        self.hLayout_v_pH.addLayout(self.vLayout_pH_main)
+
+
+        self.MainLayout.addLayout(self.hLayout_v_pH)
+
+
+        self.retranslateUi(Form)
+
+        QMetaObject.connectSlotsByName(Form)
+    # setupUi
+
+    def retranslateUi(self, Form):
+        Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
+        self.pH_cal_win_title.setText(QCoreApplication.translate("Form", u"pH Calibration Window", None))
+        self.label_v_relstabw_text.setText(QCoreApplication.translate("Form", u"rel. Stabw.:", None))
+        self.label_v_relstabw_value.setText(QCoreApplication.translate("Form", u"NULL", None))
+        self.pushButton_set_calp2.setText(QCoreApplication.translate("Form", u"Set P2", None))
+        self.pushButton_set_calp1.setText(QCoreApplication.translate("Form", u"Set P1", None))
+        self.label_v_stabw_text.setText(QCoreApplication.translate("Form", u"Stabw.:", None))
+        self.pushButton_reset_calibration.setText(QCoreApplication.translate("Form", u"Reset Calibration", None))
+        self.label_v_mean_text.setText(QCoreApplication.translate("Form", u"Mean:", None))
+        self.label_v_stabw_value.setText(QCoreApplication.translate("Form", u"NULL", None))
+        self.lavel_v_mean_value.setText(QCoreApplication.translate("Form", u"NULL", None))
+        self.pushButton_reset_measurement.setText(QCoreApplication.translate("Form", u"Reset Measure", None))
+        self.label_ph_relstabw_text.setText(QCoreApplication.translate("Form", u"rel. Stabw.:", None))
+        self.label_ph_slope_value.setText(QCoreApplication.translate("Form", u"NULL", None))
+        self.label_ph_slope_text.setText(QCoreApplication.translate("Form", u"Slope:", None))
+        self.label_ph_mean_text.setText(QCoreApplication.translate("Form", u"Mean:", None))
+        self.label_ph_stabw_text.setText(QCoreApplication.translate("Form", u"Stabw.:", None))
+        self.label_ph_offset_text.setText(QCoreApplication.translate("Form", u"TextLabel:", None))
+        self.label_ph_mean_value.setText(QCoreApplication.translate("Form", u"NULL", None))
+        self.pushButton_reset_ph.setText(QCoreApplication.translate("Form", u"Reset pH Graph", None))
+        self.label_ph_relstabw_value.setText(QCoreApplication.translate("Form", u"NULL", None))
+        self.label_ph_stabw_value.setText(QCoreApplication.translate("Form", u"NULL", None))
+        self.label_ph_offset_value.setText(QCoreApplication.translate("Form", u"NULL", None))
+    # retranslateUi
+
