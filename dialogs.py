@@ -8,7 +8,7 @@ class AboutBox(QMessageBox):
         super(AboutBox, self).__init__(parent)
         self.setTextFormat(Qt.TextFormat.RichText)
         self.setText("<h1>Photobioreactor Operation System</h1>\
-                    Versionnumber: v.0.1<br>\
+                    Versionnumber: v.1.0<br>\
                     Published:     23.10.2025<br>\
                     2025 Algea PBR 1.0 Team<br><br>\
                     <u>Team:</u>\
