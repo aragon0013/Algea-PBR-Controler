@@ -232,7 +232,7 @@ class pHCalibration(QWidget):
         self.label_ph_slope_text.setText(QCoreApplication.translate("Form", u"Slope:", None))
         self.label_ph_mean_text.setText(QCoreApplication.translate("Form", u"Mean:", None))
         self.label_ph_stabw_text.setText(QCoreApplication.translate("Form", u"Stabw.:", None))
-        self.label_ph_offset_text.setText(QCoreApplication.translate("Form", u"TextLabel:", None))
+        self.label_ph_offset_text.setText(QCoreApplication.translate("Form", u"Offset:", None))
         self.label_ph_mean_value.setText(QCoreApplication.translate("Form", u"NULL", None))
         self.pushButton_reset_ph.setText(QCoreApplication.translate("Form", u"Reset pH Graph", None))
         self.label_ph_relstabw_value.setText(QCoreApplication.translate("Form", u"NULL", None))
