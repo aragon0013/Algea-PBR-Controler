@@ -1,3 +1,31 @@
+##################################################################
+#
+#   This is the Widget File where the Light control has to be managed
+#   
+#   Note:   THIS FILE IS NOT FINISHED! As the priority of light control 
+#           development changed to a static light instead of variable 
+#           light source. I stoped development here. The UI works but 
+#           has to extend with functions to control light.
+#   
+#   Author: Andreas Müller (Github: aragon0013)
+#
+# Copyright (C) 2025 Andreas Müller
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+##################################################################
+
+
 import sys
 from PyQt6.QtCore import *
 from PyQt6.QtGui import *

@@ -1,3 +1,28 @@
+##################################################################
+#
+#   This is the About File.
+#
+#   Note: Future contribution should be added here
+#   
+#   Author: Andreas Müller (Github: aragon0013)
+#
+# Copyright (C) 2025 Andreas Müller
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+##################################################################
+
+
 import sys
 from PyQt6.QtWidgets import *
 from PyQt6.QtCore import *
@@ -8,7 +33,7 @@ class AboutBox(QMessageBox):
         super(AboutBox, self).__init__(parent)
         self.setTextFormat(Qt.TextFormat.RichText)
         self.setText("<h1>Photobioreactor Operation System</h1>\
-                    Versionnumber: v.0.1<br>\
+                    Versionnumber: v.1.0<br>\
                     Published:     23.10.2025<br>\
                     2025 Algea PBR 1.0 Team<br><br>\
                     <u>Team:</u>\
