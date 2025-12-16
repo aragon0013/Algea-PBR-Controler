@@ -26,6 +26,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 #
+# Note:     - This file was adpated a little bit, to be runable on 
+#             configured Raspberry Pi (16.12.2025-Andreas Müller)
+#
 
 import ADC_code.config as config
 import RPi.GPIO as GPIO #type: ignore

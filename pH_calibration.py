@@ -1,3 +1,29 @@
+##################################################################
+#
+#   This is the pH Calibration Widget file, here all calibration functions
+#   ...were defined.
+#
+#   Note:   - possibility to record calibration curve could be nice
+#           - possibility to save and load cal.-file could be nice
+#   
+#   Author: Andreas Müller (Github: aragon0013)
+#
+# Copyright (C) 2025 Andreas Müller
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+##################################################################
+
 import sys
 import pandas as pd
 from PyQt6.QtCore import *
@@ -232,7 +258,7 @@ class pHCalibration(QWidget):
         self.label_ph_slope_text.setText(QCoreApplication.translate("Form", u"Slope:", None))
         self.label_ph_mean_text.setText(QCoreApplication.translate("Form", u"Mean:", None))
         self.label_ph_stabw_text.setText(QCoreApplication.translate("Form", u"Stabw.:", None))
-        self.label_ph_offset_text.setText(QCoreApplication.translate("Form", u"TextLabel:", None))
+        self.label_ph_offset_text.setText(QCoreApplication.translate("Form", u"Offset:", None))
         self.label_ph_mean_value.setText(QCoreApplication.translate("Form", u"NULL", None))
         self.pushButton_reset_ph.setText(QCoreApplication.translate("Form", u"Reset pH Graph", None))
         self.label_ph_relstabw_value.setText(QCoreApplication.translate("Form", u"NULL", None))
