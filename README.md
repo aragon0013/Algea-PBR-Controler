@@ -1,7 +1,9 @@
 # Algea PBR Controler
- Software to Control an Algea PBR, this software was developed during a environmental project from university.
+Software to Control an Algea PBR, this software was developed during a environmental project from university.
 
-# PyQT Disclaimer
+I'm not a professional programmer, I created this work with passion and I liked to work on this software. But I also like to learn and improve my programming skills, so if anybody wants to give me tips and improvements I'm open for discussions.
+
+# PyQT declaration
 GUI was created with Qt Designer
 
 # EU funding declaration
